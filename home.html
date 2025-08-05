@@ -7,7 +7,7 @@
     <h1>Restaurant Menu</h1>
     <div id="menu"></div>
     <script>
-        fetch('/api/restaurant/${restaurantId}/menu/').then(response=>response.json()).then(data=>{const menuDiv=document.getElenmentById('menu');
+        fetch('/api/restaurant/1/menu/').then(response=>response.json()).then(data=>{const menuDiv=document.getElementById('menu');
         if (data.length===0){
         menuDiv.innerHTML="<p>No items Found</p>";
         return;
@@ -22,7 +22,7 @@
         ;
     });
     }).catch(error=>{
-    document.getElenmentById('menu').innerHTML="<p>Failed to load menu.</p>";
+    document.getElementById('menu').innerHTML="<p>Failed to load menu.</p>";
     console.log("error fetching menu",error);
     });
     </script>
