@@ -4,27 +4,30 @@
     <title>Restaurant Menu</title>
 </head>
 <body>
-    <h1>Restaurant Menu</h1>
-    <div id="menu"></div>
+    <h1 id="restaurant-name">Loading restaurant..</h1>
+    <div id="menu-container">Loading menu..</div>
     <script>
-        fetch('/api/restaurant/1/menu/').then(response=>response.json()).then(data=>{const menuDiv=document.getElementById('menu');
-        if (data.length===0){
-        menuDiv.innerHTML="<p>No items Found</p>";
-        return;
-        }
-        data.forEach(item=>{
-        menuDiv.innerHTML+=
-        <div>
-        <h2>${item.name}</h2>
-        <p>${item.description}
-        <p><strong>Price:</strong>${item.price}</p>
-        </div>
-        ;
-    });
-    }).catch(error=>{
-    document.getElementById('menu').innerHTML="<p>Failed to load menu.</p>";
-    console.log("error fetching menu",error);
-    });
+        const restaurantId=1;
+        fetch(`/api/restaurant/${restaurantId}/menu/`) 
+        .then(response=>response.json())
+        .then(data => { document.getElementById('restaurant-name').textContent=data.restaurant;
+        const menuDiv=document.getElementById('menu-container');
+        menuDiv.innerHTML=';'
+
+        data.menu.forEach(item=>{
+        const div=document.createElement('div');
+        div.classList.add('menu-item');
+        div.innerHTML=`<h3>${item.dish_name}</h3>
+        <span>${item.price}</span>
+        <p>${item.description}</p>`;
+        menuDiv.appendChild(div);
+        });
+        }).catch(error=>{
+        console.error('Error:',error);
+        document.getElementById('restaurant-name').textContent=`Error Loading restaurant`;
+        document.getElementById('menu-container').innerHTML=`<p>Could not Load menu.</p>`;
+        });
+        
     </script>
 </body>
 </html>
