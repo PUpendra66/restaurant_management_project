@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Restaurant Menu</title>
+</head>
+<body>
+    <h1>Restaurant Menu</h1>
+    <div id="menu"></div>
+    <script>
+        fetch('/api/restaurant/${restaurantId}/menu/').then(response=>response.json()).then(data=>{const menuDiv=document.getElenmentById('menu');
+        if (data.length===0){
+        menuDiv.innerHTML="<p>No items Found</p>";
+        return;
+        }
+        data.forEach(item=>{
+        menuDiv.innerHTML+=
+        <div>
+        <h2>${item.name}</h2>
+        <p>${item.description}
+        <p><strong>Price:</strong>${item.price}</p>
+        </div>
+        ;
+    });
+    }).catch(error=>{
+    document.getElenmentById('menu').innerHTML="<p>Failed to load menu.</p>";
+    console.log("error fetching menu",error);
+    });
+    </script>
+</body>
+</html>
