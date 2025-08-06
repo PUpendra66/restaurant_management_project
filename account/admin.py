@@ -8,8 +8,8 @@ class MenuAdmin(admin.ModelAdmin):
     search_fields=('name',)
 
 @admin.register(Order)
-class OredrAdmin(admin.ModelAdmin):
+class OrderAdmin(admin.ModelAdmin):
     list_display=('id','customer','status','total_amount','created_at')
-    list_filter=('status')
+    list_filter=('status',)
     search_fields=('customer__username',)
     filter_horizontal=('items',)
