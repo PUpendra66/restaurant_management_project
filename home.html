@@ -12,7 +12,7 @@
         .then(response=>response.json())
         .then(data => { document.getElementById('restaurant-name').textContent=data.restaurant;
         const menuDiv=document.getElementById('menu-container');
-        menuDiv.innerHTML=';'
+        menuDiv.innerHTML='';
 
         data.menu.forEach(item=>{
         const div=document.createElement('div');
